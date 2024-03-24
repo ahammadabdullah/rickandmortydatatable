@@ -29,7 +29,7 @@ const Table: React.FC<TableProps> = ({
   setCurrentPage,
   handleNextPage,
   handlePreviousPage,
-}) => {
+}): JSX.Element => {
   return (
     <table className="!w-[80%] mx-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  ">
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg m-5">
