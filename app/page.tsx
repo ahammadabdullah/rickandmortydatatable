@@ -39,8 +39,10 @@ export default function Home() {
   };
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
-      <div className="w-full">
-        <h3 className="text-center text-2xl pt-5">RickAndMorty data table</h3>
+      <h3 className="text-center text-2xl pt-5 w-fit mx-auto">
+        RickAndMorty data table
+      </h3>
+      <div className="w-full overflow-x-auto">
         <Table
           characters={characters}
           currentPage={currentPage}

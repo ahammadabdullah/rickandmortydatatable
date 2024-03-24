@@ -31,8 +31,8 @@ const Table: React.FC<TableProps> = ({
   handlePreviousPage,
 }): JSX.Element => {
   return (
-    <table className="!w-[80%] mx-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  ">
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg m-5">
+    <table className="!w-[80%] mx-auto overflow-x-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  ">
+      <div className="relative  shadow-md sm:rounded-lg m-5">
         <table className="w-[80%] mx-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400  ">
             <tr className="text-center">
@@ -81,7 +81,7 @@ const Table: React.FC<TableProps> = ({
           </tbody>
         </table>
         <nav
-          className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4 w-[480px] md:w-[80%] mx-auto"
+          className="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4 w-[480px] md:w-[83%] lg:w-[80%] mx-auto"
           aria-label="Table navigation"
         >
           <span className="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">
