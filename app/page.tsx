@@ -44,6 +44,7 @@ export default function Home() {
       </h3>
       <div className="w-full overflow-x-auto">
         <Table
+          setCharacters={setCharacters}
           characters={characters}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}

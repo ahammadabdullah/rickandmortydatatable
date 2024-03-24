@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { useState } from "react";
 /* eslint-disable react/no-unescaped-entities */
 
 interface Character {
@@ -11,12 +12,14 @@ interface Character {
   origin: {
     name: string;
   };
+  [key: string]: any;
 }
 
 interface TableProps {
   characters: Character[];
   totalPages: number;
   currentPage: number;
+  setCharacters: (characters: Character[]) => void;
   setCurrentPage: (page: number) => void;
   handleNextPage: () => void;
   handlePreviousPage: () => void;
@@ -24,14 +27,27 @@ interface TableProps {
 
 const Table: React.FC<TableProps> = ({
   characters,
+  setCharacters,
   totalPages,
   currentPage,
   setCurrentPage,
   handleNextPage,
   handlePreviousPage,
 }): JSX.Element => {
+  const [sortState, setSortState] = useState<number>(1);
+  const handleSort = (key: string) => {
+    const sortedCharacters = characters.sort((a, b) => {
+      setSortState(sortState * -1);
+      if (a[key] < b[key]) {
+        return sortState;
+      } else {
+        return sortState * -1;
+      }
+    });
+    setCharacters([...sortedCharacters]);
+  };
   return (
-    <table className="!w-[80%] mx-auto overflow-x-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  ">
+    <table className="!w-[80%] mx-auto overflow-x-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 select-none ">
       <div className="relative  shadow-md sm:rounded-lg m-5">
         <table className="w-[80%] mx-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400  ">
@@ -39,17 +55,81 @@ const Table: React.FC<TableProps> = ({
               <th scope="col" className="px-6 py-3">
                 Image
               </th>
-              <th scope="col" className="px-6 py-3">
-                Name
+              <th scope="col" className="px-6 py-3 ">
+                <div className="flex items-center justify-center">
+                  Name
+                  <a
+                    onClick={() => handleSort("name")}
+                    className="cursor-pointer"
+                  >
+                    <svg
+                      className="w-3 h-3 ms-1.5"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                    </svg>
+                  </a>
+                </div>
               </th>
-              <th scope="col" className="px-6 py-3">
-                Status
+              <th scope="col" className="px-6 py-3 ">
+                <div className="flex items-center justify-center">
+                  Status
+                  <a
+                    onClick={() => handleSort("status")}
+                    className="cursor-pointer"
+                  >
+                    <svg
+                      className="w-3 h-3 ms-1.5"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                    </svg>
+                  </a>
+                </div>
               </th>
-              <th scope="col" className="px-6 py-3">
-                Gender
+              <th scope="col" className="px-6 py-3 ">
+                <div className="flex items-center justify-center">
+                  Gender
+                  <a
+                    onClick={() => handleSort("gender")}
+                    className="cursor-pointer"
+                  >
+                    <svg
+                      className="w-3 h-3 ms-1.5"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                    </svg>
+                  </a>
+                </div>
               </th>
-              <th scope="col" className="px-6 py-3">
-                Origin
+              <th scope="col" className="px-6 py-3 ">
+                <div className="flex items-center justify-center">
+                  Origin
+                  <a
+                    onClick={() => handleSort("origin.name")}
+                    className="cursor-pointer"
+                  >
+                    <svg
+                      className="w-3 h-3 ms-1.5"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                    </svg>
+                  </a>
+                </div>
               </th>
             </tr>
           </thead>
